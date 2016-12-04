@@ -78,7 +78,7 @@
             <div class="row">
                 <div class="offset-md-2 col-md-10 offset-xs-2 col-xs-10" style="padding-left: 3px;">
                     <p>
-                        <a class="btn btn-danger arrow" arrow="up" href="./index.php?method=up" aria-label="up"><i
+                        <a class="btn btn-danger arrow" arrow="up" href="./index.php" aria-label="up"><i
                                 class=" fa fa-arrow-circle-up" aria-hidden="true"></i></a>
                     </p>
                 </div>
