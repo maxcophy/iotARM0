@@ -2,11 +2,10 @@
  * Created by lumpa on 2016/10/29.
  */
 $(document).ready(function () {
-
-    $('.arrow').click(function () {
+    function getRequest(direct) {
         $.ajax({
             type: "GET",
-            url: "phpFunction/mysql_iot.php?move=" + $(this).attr('arrow'),
+            url: "phpFunction/mysql_iot.php?move=" + direct,
             dataType: "json",
             success: function (data) {
                 if (data.result) {
@@ -21,7 +20,15 @@ $(document).ready(function () {
                 alert("發生錯誤: " + jqXHR.status);
             }
         });
-        event.preventDefault();
-    });
+    }
 
+    $('.arrow').mousedown(function () {
+        event.preventDefault();
+        var direct = $(this).attr('arrow');
+        timeout = setInterval(getRequest(direct), 250);
+        return false;
+    }).mouseup(function () {
+        clearInterval(timeout);
+        return false;
+    });
 });

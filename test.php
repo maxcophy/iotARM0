@@ -55,7 +55,7 @@
             </div>
             <div class="col-md-6">
                 <p>看看您的監控設備吧:</p>
-                <img src="http://192.168.43.20:8080/?action=stream" class="img-thumbnail">
+                <img src="http://192.168.43.91:8080/stream" class="img-thumbnail">
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@
             <div class="row">
                 <div class="offset-md-2 col-md-10 offset-xs-2 col-xs-10" style="padding-left: 3px;">
                     <p>
-                        <a class="btn btn-danger arrow" arrow="up" href="./index.php?method=up" aria-label="up"><i
+                        <a class="btn btn-danger arrow" arrow="up" href="./test.php?method=up" aria-label="up"><i
                                 class=" fa fa-arrow-circle-up" aria-hidden="true"></i></a>
                     </p>
                 </div>
@@ -86,13 +86,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        <a class="btn btn-danger arrow" arrow="left" href="./index.php" aria-label="left">
+                        <a class="btn btn-danger arrow" arrow="left" href="./test.php?method=left" aria-label="left">
                             <i class=" fa fa-arrow-circle-left" aria-hidden="true"></i>
                         </a>
-                        <a class="btn btn-danger arrow" arrow="down" href="./index.php" aria-label="down">
+                        <a class="btn btn-danger arrow" arrow="down" href="./test.php?method=down" aria-label="down">
                             <i class=" fa fa-arrow-circle-down" aria-hidden="true"></i>
                         </a>
-                        <a class="btn btn-danger arrow" arrow="right" href="./index.php"
+                        <a class="btn btn-danger arrow" arrow="right" href="./test.php?method=right"
                            aria-label="right">
                             <i class=" fa fa-arrow-circle-right" aria-hidden="true"></i>
                         </a>
@@ -104,7 +104,7 @@
         </div>
         <div class="col-md-4">
             <h2>Android Controller<br>躺著玩</h2>
-            <img src="asset/image/bt.png" width="250" class="img-thumbnail">
+            <img src="asset/image/bt.png" width="250" class="img-thumbnail" >
             <p>手機APP就可以及時智能監控</p>
             <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div>
@@ -132,11 +132,11 @@
         crossorigin="anonymous"></script>
 
 <script>
-    $(document).ready(function () {
-        $('.arrow').mousedown(function () {
-            event.preventDefault();
+    var timeout;
+    $(document).ready(function(){
+        $('.arrow').mousedown(function(){
             var direct = $(this).attr('arrow');
-            timeout = setInterval(function () {
+            timeout = setInterval(function(){
                 $.ajax({
                     type: "GET",
                     url: "phpFunction/mysql_iot.php?move=" + direct,
@@ -154,9 +154,10 @@
                         alert("發生錯誤: " + jqXHR.status);
                     }
                 });
-            }, 250);
+                event.preventDefault();
+            },500);
             return false;
-        }).mouseup(function () {
+        }).mouseup(function(){
             clearInterval(timeout);
             return false;
         });
